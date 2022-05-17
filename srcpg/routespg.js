@@ -6,9 +6,10 @@ const CategoriaPg = require('../modelospg/categoriaspg');
 const ProdutoPg = require ('../modelospg/produtospg');
 const EstoquePg = require ('../modelospg/estoquespg');
 const res = require('express/lib/response');
-
+const fetch = require('cross-fetch');
 
 //Inicio da API
+
 
 (async () => {
 
@@ -22,7 +23,8 @@ const res = require('express/lib/response');
             res.status(422).json({error: 'o codigo é obrigatório'})
         }
         const novaCategoria = req.body
-      
+        
+
         try {
     
             await CategoriaPg.create(novaCategoria);
@@ -127,7 +129,16 @@ const res = require('express/lib/response');
     //Listar Todas as Categorias OK
     routespg.get('/listarcategorias', async (req,res) => {
         const listaCategorias = await CategoriaPg.findAll();
-        return res.json({listaCategorias})
+        
+        //recebendo informações do outro servidor 
+        const {id} = req.headers;
+
+        if (id) {
+            console.log('---- RECBENDO JSON POSTGRESS --- ')
+        }
+        
+       
+        return res.json({listaCategorias})        
 
 
     }) 

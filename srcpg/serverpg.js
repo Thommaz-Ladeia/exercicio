@@ -26,13 +26,7 @@
 
         //Enviar endpoints para o outro servidor e atualizar tabela
         
-        //              /1 para rodar de 1 em um minuto
-       cron.schedule("1 * * * * * ", () => 
-       
-       fetch("localhost:3333/listarcategorias")
-       .then((resposta) => console.log(resposta))); ///código restante
-       
-       
+            
         
     
     })
